@@ -1,0 +1,56 @@
+#!/bin/bash
+
+echo "Running pre-commit checks..."
+
+# Get staged Python and Jupyter Notebook files
+python_files=$(git diff --cached --name-only --diff-filter=d | grep -E '\.py$')
+notebook_files=$(git diff --cached --name-only --diff-filter=d | grep -E '\.ipynb$')
+
+# ---- Run Ruff checks on Python files ----
+if [[ -n "$python_files" ]]; then
+    echo "Running Ruff linting..."
+    ruff_output=$(ruff check $python_files 2>&1)
+    if [[ $? -ne 0 ]]; then
+        echo "❌ Ruff found issues. Commit aborted."
+        echo "--------------------------------------------------"
+        echo "$ruff_output"
+        echo "--------------------------------------------------"
+        echo "💡 Fix the issues above and try committing again."
+        exit 1
+    fi
+
+    echo "Running Ruff formatting..."
+    ruff_format_output=$(ruff format --check $python_files 2>&1)
+    if [[ $? -ne 0 ]]; then
+        echo "❌ Ruff formatting issues found. Commit aborted."
+        echo "--------------------------------------------------"
+        echo "$ruff_format_output"
+        echo "--------------------------------------------------"
+        echo "💡 Run 'ruff format .' to auto-fix formatting issues."
+        exit 1
+    fi
+
+    echo "Running Pyright type checking..."
+    pyright_output=$(pyright $python_files 2>&1)
+    if [[ $? -ne 0 ]]; then
+        echo "❌ Pyright found type issues. Commit aborted."
+        echo "--------------------------------------------------"
+        echo "$pyright_output"
+        echo "--------------------------------------------------"
+        echo "💡 Fix the issues above and try committing again."
+        exit 1
+    fi
+fi
+
+# ---- Remove images from Jupyter notebooks ----
+if [[ -n "$notebook_files" ]]; then
+    echo "Stripping images from Jupyter notebooks..."
+    for file in $notebook_files; do
+        jq '(.cells[] | select(.cell_type=="code") | .outputs) = []' "$file" > "${file}.clean"
+        mv "${file}.clean" "$file"
+        git add "$file"
+    done
+fi
+
+echo "✅ Pre-commit checks passed!"
+exit 0
