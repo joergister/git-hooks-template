@@ -6,8 +6,16 @@ echo "Running pre-commit checks..."
 python_files=$(git diff --cached --name-only --diff-filter=d | grep -E '\.py$')
 notebook_files=$(git diff --cached --name-only --diff-filter=d | grep -E '\.ipynb$')
 
-# ---- Run Ruff checks on Python files ----
+# ---- Process Python files: Auto-format then run quality checks ----
 if [[ -n "$python_files" ]]; then
+    echo "Auto-formatting Python files with Ruff..."
+    for file in $python_files; do
+        # Auto-format the file in place using the correct flag
+        ruff format --fix "$file"
+        # Re-add the file to the staging area in case it was modified
+        git add "$file"
+    done
+
     echo "Running Ruff linting..."
     ruff_output=$(ruff check $python_files 2>&1)
     if [[ $? -ne 0 ]]; then
@@ -19,14 +27,14 @@ if [[ -n "$python_files" ]]; then
         exit 1
     fi
 
-    echo "Running Ruff formatting..."
-    ruff_format_output=$(ruff format --check $python_files 2>&1)
+    echo "Running flake8-annotations to check for missing type hints..."
+    annotations_output=$(flake8 --select=ANN $python_files 2>&1)
     if [[ $? -ne 0 ]]; then
-        echo "❌ Ruff formatting issues found. Commit aborted."
+        echo "❌ Missing type annotations detected. Commit aborted."
         echo "--------------------------------------------------"
-        echo "$ruff_format_output"
+        echo "$annotations_output"
         echo "--------------------------------------------------"
-        echo "💡 Run 'ruff format .' to auto-fix formatting issues."
+        echo "💡 Please add explicit type annotations to all functions and try committing again."
         exit 1
     fi
 
@@ -42,7 +50,7 @@ if [[ -n "$python_files" ]]; then
     fi
 fi
 
-# ---- Remove images from Jupyter notebooks ----
+# ---- Process Jupyter Notebook files: Only remove images ----
 if [[ -n "$notebook_files" ]]; then
     echo "Stripping images from Jupyter notebooks..."
     for file in $notebook_files; do
