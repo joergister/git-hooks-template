@@ -13,6 +13,13 @@ This repository provides a **pre-commit hook** that enforces:
 - **Platform Agnostic**: Works on any Git platform (GitHub, GitLab, Bitbucket, etc.)  
 
 ---
+📌 **How It Works:**  
+- When committing files, only **staged** (`git add`-ed) files are checked.  
+- If an issue is found, the commit is **blocked** until the problems are fixed.  
+- The hook ensures **all code committed after the installation of the pre-commit-hook meets quality standards** before it reaches the repository. 
+
+
+---
 
 ## **📋 Prerequisites**
 Before using these hooks, ensure you have:
@@ -67,12 +74,6 @@ Before using these hooks, ensure you have:
    ```  
    You should see a **symbolic link** pointing to `../../.hooks/pre-commit`.
 
----
-
-📌 **How It Works:**  
-- When committing files, only **staged** (`git add`-ed) files are checked.  
-- If an issue is found, the commit is **blocked** until the problems are fixed.  
-- The hook ensures **all code committed after the installation of the pre-commit-hook meets quality standards** before it reaches the repository. 
 
 ---
 
