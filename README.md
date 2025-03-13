@@ -24,7 +24,7 @@ Before using these hooks, ensure you have:
 
 ## **🚀 Installation**
 
-### **Option 1: Setting Up Hooks for an Existing Project (Recommended)**
+### **Option 1: Setting Up Hooks for an Existing Project**
 > This method installs the hooks into an **already existing Git repository**.  
 > Only **new or modified** files will be checked when committing.
 
@@ -35,7 +35,7 @@ Before using these hooks, ensure you have:
 
 2. **Clone the hook repository (temporarily)**  
    ```sh
-   git clone <your-hooks-repo> temp-hooks
+   git clone <Repo-URL> temp-hooks
    ```
 
 3. **Copy the necessary files into your project**  
