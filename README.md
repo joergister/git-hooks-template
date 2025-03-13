@@ -1,9 +1,11 @@
 # **🚀 Git Hooks for Code Quality & Clean Repos**
 
 This repository provides a **pre-commit hook** that enforces:
-- ✅ **Ruff linting & formatting** for Python code
+- ✅ **Ruff linting & formatting** for Python code (with auto-formatting enabled)
 - ✅ **Pyright type checking** for static analysis
-- ✅ **Automatic image removal from Jupyter notebooks**
+- ✅ **flake8-annotations** to ensure all functions have explicit type annotations
+- ✅ **Automatic image removal from Jupyter notebooks** (without running code quality checks on them)
+
 
 ---
 
@@ -13,10 +15,21 @@ This repository provides a **pre-commit hook** that enforces:
 - **Platform Agnostic**: Works on any Git platform (GitHub, GitLab, Bitbucket, etc.)  
 
 ---
-📌 **How It Works:**  
-- When committing files, only **staged** (`git add`-ed) files are checked.  
-- If an issue is found, the commit is **blocked** until the problems are fixed.  
-- The hook ensures **all code committed after the installation of the pre-commit-hook meets quality standards** before it reaches the repository. 
+## 📋 How It Works
+When you commit code, the pre-commit hook automatically performs the following steps:
+1. **Auto-formatting**:  
+   - Python files are auto-formatted using Ruff with the `--fix` flag.
+   - The modified files are re-added to the staging area.
+2. **Code Quality Checks on Python Files**:  
+   - **Ruff** checks code style and formatting.
+   - **flake8-annotations** ensures every function includes explicit type annotations.
+   - **Pyright** verifies type correctness.
+3. **Jupyter Notebook Processing**:  
+   - Notebook files are processed solely to remove embedded image outputs (using `jq`), keeping them lightweight without performing other code quality checks.
+
+If any issues are detected in Python files, the commit is blocked until the problems are resolved. Only staged files are processed.
+
+
 
 
 ---
@@ -102,17 +115,8 @@ Before using these hooks, ensure you have:
    ls -la .git/hooks/pre-commit
    ```  
 
-📌 **How It Works:**  
-- This setup ensures that **from the very first commit**, your project follows best practices.  
-- Every commit is automatically checked for **linting, type safety, and Jupyter image removal**.  
 
----
 
-## **🎯 How It Works**
-When you commit code, the pre-commit hook automatically:
-- Runs **Ruff** to check code style and formatting  
-- Runs **Pyright** to verify type correctness  
-- Removes **image outputs from Jupyter notebooks** to keep your repo clean  
 
 ---
 
