@@ -80,6 +80,11 @@ Before using these hooks, ensure you have:
    pip install -r requirements.txt
    ./setup-hooks.sh
    ```
+This will:
+
+- Install the pre-commit hook
+- Ensure pyproject.toml is configured (creates one if missing)
+- Set the maximum function length to 50 statements using Ruff
 
 7. **Verify the hook is installed**  
    ```sh
