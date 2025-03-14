@@ -10,9 +10,12 @@ This repository provides a **pre-commit hook** that enforces:
 ---
 
 ## **📌 Why Use This?**
-- **Consistent Code Quality**: Enforces style and type checking automatically  
-- **Clean Repositories**: Prevents large notebook files from bloating your repo  
-- **Platform Agnostic**: Works on any Git platform (GitHub, GitLab, Bitbucket, etc.)  
+Maintaining code quality is essential for managing complex codebases. Learn more about [the purpose of enforcing code style](What%20is%20the%20Purpose%20of%20CodeStyle%3F.md) and how it helps with:
+
+- Knowledge management
+- Faster debugging
+- Improved code clarity
+- Better maintainability
 
 ---
 ## 📋 How It Works
