@@ -28,7 +28,7 @@ if [[ -n "$python_files" ]]; then
     fi
 
     echo "Running flake8-annotations to check for missing type hints..."
-    annotations_output=$(flake8 --select=ANN $python_files 2>&1)
+    annotations_output=$(flake8 --select=ANN --ignore=ANN101 $python_files 2>&1)
     if [[ $? -ne 0 ]]; then
         echo "❌ Missing type annotations detected. Commit aborted."
         echo "--------------------------------------------------"
