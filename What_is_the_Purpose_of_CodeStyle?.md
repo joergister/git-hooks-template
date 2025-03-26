@@ -27,3 +27,6 @@ Automated tests serve as a critical safety net when making changes to a large co
 Modern testing frameworks like pytest simplify the process of writing clear and maintainable tests. Furthermore, with advances in large language models (LLMs), much of the test generation can now be automated. LLMs can suggest test cases based on your existing code, leaving the developer to review and confirm their relevance, and thereby reducing the manual effort required.
 
 By providing this safety net, automated tests facilitate making iterative improvements and changes without needing to master every detail of a large, complex codebase. As long as you have a solid understanding of the architecture and the key areas where specific functionalities reside, tests will catch unintended side effects, allowing you to focus on evolving your project with confidence.
+
+----
+Somebody on Youtube has a few examples that makes this all more tangible https://www.youtube.com/watch?v=kfyo-N-xAwE
