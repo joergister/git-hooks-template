@@ -1,161 +1,134 @@
-# **🚀 Git Hooks for Code Quality & Clean Repos**
+# **🚀 Git Hooks for Code Quality & Clean Repos with pre-commit**
 
-This repository provides a **pre-commit hook** that enforces:
-- ✅ **Ruff linting & formatting** for Python code (with auto-formatting enabled)
+This repository provides a configuration for the **[pre-commit](https://pre-commit.com/)** framework to enforce:
+- ✅ **Ruff formatting** for Python code (auto-fixes enabled)
+- ✅ **Ruff linting** for Python code (including rules similar to flake8-annotations, auto-fixes enabled)
 - ✅ **Pyright type checking** for static analysis
-- ✅ **flake8-annotations** to ensure all functions have explicit type annotations
-- ✅ **Automatic image removal from Jupyter notebooks** (without running code quality checks on them)
-
+- ✅ **Automatic output removal from Jupyter notebooks** using `nbstripout`
 
 ---
 
 ## **📌 Why Use This?**
-Maintaining code quality is essential for managing complex codebases. Learn more about [the purpose of enforcing code style](What%20is%20the%20Purpose%20of%20CodeStyle%3F.md) and how it helps with:
-
-- Knowledge management
-- Faster debugging
-- Improved code clarity
+Maintaining code quality is essential for managing complex codebases. This setup helps with:
+- Consistent code style
+- Early bug detection
+- Improved code clarity and readability
 - Better maintainability
+- Cleaner Jupyter notebooks in version control
+
+Learn more about [the purpose of enforcing code style](What%20is%20the%20Purpose%20of%20CodeStyle%3F.md).
 
 ---
-## 📋 How It Works
-When you commit code, the pre-commit hook automatically performs the following steps:
-1. **Auto-formatting**:  
-   - Python files are auto-formatted using Ruff with the `--fix` flag.
-   - The modified files are re-added to the staging area.
-2. **Code Quality Checks on Python Files**:  
-   - **Ruff** checks code style and formatting.
-   - **flake8-annotations** ensures every function includes explicit type annotations.
-   - **Pyright** verifies type correctness.
-3. **Jupyter Notebook Processing**:  
-   - Notebook files are processed solely to remove embedded image outputs (using `jq`), keeping them lightweight without performing other code quality checks.
-
-If any issues are detected in Python files, the commit is blocked until the problems are resolved. Only staged files are processed.
-
-
-
-
----
-
 ## **📋 Prerequisites**
 Before using these hooks, ensure you have:
-- **Python** (3.7 or higher)  
-- **jq** for Jupyter notebook processing (required for notebook image removal)  
-- **Required Python packages** (installed via `requirements.txt` with `pip` or `uv`)  
+- **Python** (3.8 or higher recommended, as per typical pre-commit tool requirements)
+- **pip** (for installing Python packages)
+- **Git** (for version control and pre-commit integration)
 
 ---
 
-## **🚀 Installation**
+## **🚀 Installation & Setup**
 
-### **Option 1: Setting Up Hooks for an Existing Project**
-> This method installs the hooks into an **already existing Git repository**.  
-> Only **new or modified** files will be checked when committing.
+These instructions apply to both new projects and existing Git repositories.
 
-1. **Navigate to your existing project directory**  
-   ```sh
-   cd /path/to/your-project
-   ```
+1.  **Clone this repository (if starting anew) or navigate to your existing project.**
+    ```sh
+    # For a new project:
+    # git clone <your-repo-url> my-new-project
+    # cd my-new-project
+    # git init # If not already a git repository
 
-2. **Clone the hook repository (temporarily)**  
-   ```sh
-   git clone <Repo-URL> temp-hooks
-   ```
+    # For an existing project:
+    # cd /path/to/your-project
+    ```
 
-3. **Copy the necessary files into your project**  
-   ```sh
-   cp -r temp-hooks/.hooks .  # Copies the hooks folder
-   cp temp-hooks/setup-hooks.sh .  # Copies the setup script
-   ```
+2.  **Ensure you have `requirements.txt` and `.pre-commit-config.yaml` from this template in your project root.**
+    If you cloned this repository, they are already there. If integrating into an existing project, copy them over.
 
-4. **Merge dependencies into your existing `requirements.txt`**  
-   ```sh
-   cat temp-hooks/requirements.txt >> requirements.txt
-   sort -u requirements.txt -o requirements.txt  # Remove duplicates
-   ```
+3.  **Create and activate a virtual environment (recommended):**
+    ```sh
+    python -m venv .venv
+    source .venv/bin/activate  # On Windows use ` .venv\Scripts\activate`
+    ```
 
-5. **Clean up the temporary hook repo**  
-   ```sh
-   rm -rf temp-hooks
-   ```
+4.  **Install Python dependencies:**
+    This will install `pre-commit` and all the configured hook tools (Ruff, Pyright, nbstripout).
+    ```sh
+    pip install -r requirements.txt
+    ```
 
-6. **Install dependencies and enable the pre-commit hook**  
-   ```sh
-   pip install -r requirements.txt
-   ./setup-hooks.sh
-   ```
-This will:
+5.  **Install the pre-commit hooks:**
+    This command reads `.pre-commit-config.yaml` and sets up the git hooks.
+    ```sh
+    pre-commit install
+    ```
 
-- Install the pre-commit hook
-- Ensure pyproject.toml is configured (creates one if missing)
-- Set the maximum function length to 50 statements using Ruff
-
-7. **Verify the hook is installed**  
-   ```sh
-   ls -la .git/hooks/pre-commit
-   ```  
-   You should see a **symbolic link** pointing to `../../.hooks/pre-commit`.
-
+Now, the hooks will run automatically on `git commit` for staged files.
 
 ---
+## **⚙️ How It Works**
 
-### **Option 2: Using This as a Starting Point for a New Project**
-> Use this if you're starting a fresh project and want to include these hooks from the beginning.
+This project uses the [pre-commit](https://pre-commit.com/) framework to manage and run code quality checks before each commit. The configuration is defined in the `.pre-commit-config.yaml` file.
 
-1. **Clone this repository**  
-   ```sh
-   git clone <your-repo-url> my-new-project
-   cd my-new-project
-   ```
+When you run `git commit`:
+1.  **`pre-commit` is triggered.**
+2.  It runs the configured hooks on the files staged for commit:
+    *   **Ruff Formatter (`ruff-format`):** Automatically formats Python code. Files modified by the formatter are re-staged.
+    *   **Ruff Linter (`ruff-check`):** Checks Python code for style issues, errors, and enforces rules (including type annotation checks, replacing `flake8-annotations`). Many issues are auto-fixed.
+    *   **Pyright (`pyright`):** Performs static type checking on Python code.
+    *   **nbstripout (`nbstripout`):** Removes output cells from Jupyter Notebooks (`.ipynb` files) to keep the repository clean and reduce diff sizes.
 
-2. **Initialize a new Git repository (if starting from scratch)**  
-   ```sh
-   git init
-   ```
+If any of these hooks report errors (and cannot auto-fix them), the commit will be aborted. You'll need to fix the reported issues and `git add` the files again before re-attempting the commit.
 
-3. **Install dependencies and set up hooks**  
-   ```sh
-   pip install -r requirements.txt
-   ./setup-hooks.sh
-   ```
+### **Manually Running Hooks**
 
-4. **Verify installation**  
-   ```sh
-   ls -la .git/hooks/pre-commit
-   ```  
+You can run the hooks on all files in the repository at any time:
+```sh
+pre-commit run --all-files
+```
+Or on specific files:
+```sh
+pre-commit run --files path/to/file1.py path/to/notebook.ipynb
+```
 
-
-
+To update the hook versions (defined in `.pre-commit-config.yaml`) to their latest releases:
+```sh
+pre-commit autoupdate
+```
 
 ---
 
 ## **🔧 Troubleshooting**
-### **Hooks aren't running during commits**
-- Verify installation with:  
-  ```sh
-  ls -la .git/hooks/
-  ```
-- Ensure the pre-commit hook is **executable**:  
-  ```sh
-  chmod +x .hooks/pre-commit
-  ```
-- Make sure you **ran the setup script**:  
-  ```sh
-  ./setup-hooks.sh
-  ```
 
-### **jq command not found**
-The hook uses `jq` to process Jupyter notebooks. Install it using:
-- macOS: `brew install jq`
-- Ubuntu/Debian: `sudo apt-get install jq`
-- Windows: `choco install jq` or download from [GitHub](https://github.com/jqlang/jq) or the [official website](https://jqlang.org/download/)
+### **Hooks aren't running during commits**
+1.  **Verify `pre-commit` is installed in your environment:**
+    ```sh
+    pip show pre-commit
+    ```
+    If not found, reinstall dependencies: `pip install -r requirements.txt`
+2.  **Ensure hooks are installed for your local Git repo:**
+    Run `pre-commit install` again. This should confirm if hooks are already installed or install them.
+3.  **Check the `.git/hooks/pre-commit` file:**
+    It should be a script managed by the `pre-commit` framework. Tampering with it directly can break the setup.
+
+### **Tool-specific errors (Ruff, Pyright, nbstripout)**
+-   Consult the specific tool's documentation for error messages.
+-   Ensure the versions in `.pre-commit-config.yaml` are compatible with your code or update them using `pre-commit autoupdate` and test.
+-   Ruff's behavior (including annotation checks) is configured in `pyproject.toml`.
+
+### **"command not found" for a hook**
+-   This usually means the tool (e.g., `ruff`, `pyright`) didn't install correctly via `pip install -r requirements.txt`.
+-   Try reinstalling dependencies in a clean virtual environment.
+-   Ensure your `PATH` is correctly configured if you have multiple Python versions or environments.
 
 ---
 
-## **🔗 Next Steps**
-- [Customize pre-commit hooks](https://pre-commit.com/)  
-- [Learn more about Ruff](https://github.com/charliermarsh/ruff)  
-- [Read about Pyright](https://github.com/microsoft/pyright)  
-
+## **🔗 Next Steps & References**
+-   **[pre-commit Documentation](https://pre-commit.com/):** The official site for the pre-commit framework.
+-   **[Ruff](https://docs.astral.sh/ruff/):** Documentation for the Ruff linter and formatter.
+-   **[Pyright (Microsoft Pyright GitHub)](https://github.com/microsoft/pyright):** Information on the Pyright type checker.
+-   **[nbstripout (GitHub)](https://github.com/kynan/nbstripout):** For `nbstripout` details.
+-   **`.pre-commit-config.yaml`:** Review this file in the repository to see the exact hook configurations.
+-   **`pyproject.toml`:** Review this file for Ruff's specific linting and formatting rules.
 
 🚀 **Happy coding with clean, high-quality commits!**
-

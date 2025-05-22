@@ -2,7 +2,7 @@
 # Other Ruff configurations
 
 [tool.ruff.lint]
-extend-select = ["PLR0915"]  # Enable Pylint's "too-many-statements" rule
+extend-select = ["PLR0915", "ANN"]  # Enable Pylint's "too-many-statements" and flake8-annotations rules
 
 [tool.ruff.lint.pylint]
 max-statements = 50  # Set the maximum number of statements per function
