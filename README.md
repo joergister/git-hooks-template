@@ -16,7 +16,7 @@ Maintaining code quality is essential for managing complex codebases. This setup
 - Better maintainability
 - Cleaner Jupyter notebooks in version control
 
-Learn more about [the purpose of enforcing code style](What_is_the_Purpose_of_CodeStyle?.md).
+Learn more about [the purpose of enforcing code style](What_is_the_Purpose_of_CodeStyle.md).
 
 ---
 ## **📋 Prerequisites**
