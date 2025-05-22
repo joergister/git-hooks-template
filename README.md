@@ -11,7 +11,6 @@ This repository provides a configuration for the **[pre-commit](https://pre-comm
 ## **📌 Why Use This?**
 Maintaining code quality is essential for managing complex codebases. This setup helps with:
 - Consistent code style
-- Early bug detection
 - Improved code clarity and readability
 - Better maintainability
 - Cleaner Jupyter notebooks in version control
