@@ -16,13 +16,14 @@ Maintaining code quality is essential for managing complex codebases. This setup
 - Better maintainability
 - Cleaner Jupyter notebooks in version control
 
-Learn more about [the purpose of enforcing code style](What%20is%20the%20Purpose%20of%20CodeStyle%3F.md).
+Learn more about [the purpose of enforcing code style](What_is_the_Purpose_of_CodeStyle?.md).
 
 ---
 ## **📋 Prerequisites**
 Before using these hooks, ensure you have:
 - **Python** (3.8 or higher recommended, as per typical pre-commit tool requirements)
-- **pip** (for installing Python packages)
+   *   If you don't have Python installed or need a specific version, consider using a tool like [UV](https://github.com/astral-sh/uv) for easy [installation of python Versions] (https://docs.astral.sh/uv/concepts/python-versions/) and [environment management] (https://docs.astral.sh/uv/pip/environments/) and also very fast [management of python packages] (https://docs.astral.sh/uv/pip/packages/). It has been becoming the  new industry standart for new projects over the last couple of years. 
+- **pip** (or **uv pip**)(for installing Python packages)
 - **Git** (for version control and pre-commit integration)
 
 ---
