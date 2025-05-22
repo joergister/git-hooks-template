@@ -1,4 +1,4 @@
-# **🚀 Git Hooks for Code Quality & Clean Repos with pre-commit**
+# **Git Hooks for Code Quality & Clean Repos with pre-commit**
 
 This repository provides a configuration for the **[pre-commit](https://pre-commit.com/)** framework to enforce:
 - ✅ **Ruff formatting** for Python code (auto-fixes enabled)
