@@ -5,9 +5,11 @@ repos:
     rev: v0.11.10 # This rev is for ruff itself, managed by the hook
     hooks:
     -   id: ruff-format
-        args: [--fix]
+        args: []
+        types: [python]
     -   id: ruff-check # Changed from 'ruff' to 'ruff-check' as per ruff-pre-commit docs
         args: [--fix, --exit-non-zero-on-fix]
+        types: [python]
         # Configuration for specific lint rules (like flake8-annotations)
         # will be handled in pyproject.toml
 
@@ -15,6 +17,7 @@ repos:
     rev: v1.1.400
     hooks:
     -   id: pyright
+        types: [python]
 
 -   repo: https://github.com/kynan/nbstripout
     rev: 0.8.1
