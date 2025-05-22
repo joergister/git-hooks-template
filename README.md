@@ -22,7 +22,7 @@ Learn more about [the purpose of enforcing code style](What_is_the_Purpose_of_Co
 ## **📋 Prerequisites**
 Before using these hooks, ensure you have:
 - **Python** (3.8 or higher recommended, as per typical pre-commit tool requirements)
-   *   If you don't have Python installed or need a specific version, consider using a tool like [UV](https://github.com/astral-sh/uv) for easy [installation] (https://docs.astral.sh/uv/concepts/python-versions/)  of python Versions and [environment] (https://docs.astral.sh/uv/pip/environments/) management and also very fast [management] (https://docs.astral.sh/uv/pip/packages/) of python packages. It has been becoming the  new industry standart for new projects over the last couple of years. 
+   *   If you don't have Python installed or need a specific version, consider using a tool like [UV](https://github.com/astral-sh/uv) for easy [installation of python Versions](https://docs.astral.sh/uv/concepts/python-versions/) and [environment management](https://docs.astral.sh/uv/pip/environments/)  and also very fast [management of python packages](https://docs.astral.sh/uv/pip/packages/) . It has been becoming the  new industry standart for new projects over the last couple of years. 
 - **pip** (or **uv pip**)(for installing Python packages)
 - **Git** (for version control and pre-commit integration)
 
