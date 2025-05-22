@@ -106,7 +106,7 @@ def calculate_stress(force: float, area: float) -> float:
 
 **Tools:**
 - **mypy**: Command-line tool that checks your code (`mypy your_file.py`)
-- **Pyright/Pylance**: Integrated into VS Code for real-time feedback
+- **Pyright/Pylance**: Integrated into VS Code for real-time feedback or into the Commit Hook like in this Template
 
 **When to use:**
 - During development to catch potential errors early
