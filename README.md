@@ -44,6 +44,7 @@ These instructions apply to both new projects and existing Git repositories.
 
 2.  **Ensure you have `requirements.txt` and `.pre-commit-config.yaml` from this template in your project root.**
     If you cloned this repository, they are already there. If integrating into an existing project, copy them over.
+    **Note:** If you modify `.pre-commit-config.yaml` after the initial setup, remember to stage the changes (`git add .pre-commit-config.yaml`) before committing.
 
 3.  **Create and activate a virtual environment (recommended):**
     ```sh
