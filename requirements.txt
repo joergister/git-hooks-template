@@ -1,5 +1,4 @@
 # Python dependencies for git-hooks-template
-ruff>=0.0.270  # For linting and formatting
-pyright>=1.1.300  # For type checking
-flake8
-flake8-annotations
+ruff  # For linting and formatting
+pyright  # For type checking
+pre-commit
