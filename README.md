@@ -6,6 +6,8 @@ This repository provides a configuration for the **[pre-commit](https://pre-comm
 - ✅ **Pyright type checking** for static analysis
 - ✅ **Automatic output removal from Jupyter notebooks** using `nbstripout`
 
+**Code formatting is not applied to Jupyter notebooks; they are designed to be of temporary nature**
+
 ---
 
 ## **📌 Why Use This?**
