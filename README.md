@@ -127,11 +127,10 @@ pre-commit autoupdate
 ---
 
 ## **🔗 Next Steps & References**
--   **[pre-commit Documentation](https://pre-commit.com/):** The official site for the pre-commit framework.
--   **[Ruff](https://docs.astral.sh/ruff/):** Documentation for the Ruff linter and formatter.
--   **[ty (Astral)](https://github.com/astral-sh/ty):** An extremely fast Python type checker from the creators of Ruff and UV.
--   **[ty Documentation](https://docs.astral.sh/ty/):** Full documentation for the ty type checker.
--   **[nbstripout (GitHub)](https://github.com/kynan/nbstripout):** For `nbstripout` details.
+-   **[pre-commit Documentation](https://pre-commit.com/):** 
+-   **[Ruff Documentation](https://docs.astral.sh/ruff/):** 
+-   **[ty Documentation](https://docs.astral.sh/ty/):** 
+-   **[nbstripout (GitHub)](https://github.com/kynan/nbstripout):** 
 -   **`.pre-commit-config.yaml`:** Review this file in the repository to see the exact hook configurations.
 -   **`pyproject.toml`:** Review this file for Ruff's specific linting and formatting rules, and ty's type checking configuration.
 
