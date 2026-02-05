@@ -6,3 +6,18 @@ extend-select = ["PLR0915", "ANN", "C901"]  # Enable Pylint's "too-many-statemen
 
 [tool.ruff.lint.pylint]
 max-statements = 50  # Set the maximum number of statements per function
+
+[tool.ty.src]
+exclude = ["test_type_errors.py", ".venv/", "venv/"]
+
+[tool.ty.rules]
+# Core Type Errors
+invalid-argument-type = "error"
+invalid-assignment = "error"
+invalid-return-type = "error"
+unresolved-import = "error"
+
+# Corrected Strict Rules
+call-non-callable = "error"
+not-subscriptable = "error"
+unsupported-operator = "error"
