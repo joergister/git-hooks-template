@@ -106,7 +106,8 @@ def calculate_stress(force: float, area: float) -> float:
 
 **Tools:**
 - **mypy**: Command-line tool that checks your code (`mypy your_file.py`)
-- **Pyright/Pylance**: Integrated into VS Code for real-time feedback or into the Commit Hook like in this Template
+- **ty**: An extremely fast type checker from [Astral](https://astral.sh) (creators of Ruff and UV), integrated into the commit hook in this template. Also available as a [language server](https://docs.astral.sh/ty/editors/) for VS Code and other editors.
+- **Pyright/Pylance**: Integrated into VS Code for real-time feedback
 
 **When to use:**
 - During development to catch potential errors early
