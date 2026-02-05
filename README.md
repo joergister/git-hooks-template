@@ -3,7 +3,7 @@
 This repository provides a configuration for the **[pre-commit](https://pre-commit.com/)** framework to enforce:
 - ✅ **Ruff formatting** for Python code (auto-fixes enabled)
 - ✅ **Ruff linting** for Python code (including rules similar to flake8-annotations, auto-fixes enabled)
-- ✅ **Pyright type checking** for static analysis
+- ✅ **ty type checking** for static analysis (from [Astral](https://astral.sh), the creators of Ruff and UV)
 - ✅ **Automatic output removal from Jupyter notebooks** using `nbstripout`
 
 **Code formatting is not applied to Jupyter notebooks; they are designed to be of temporary nature**
@@ -55,7 +55,7 @@ These instructions apply to both new projects and existing Git repositories.
     ```
 
 4.  **Install Python dependencies:**
-    This will install `pre-commit` and all the configured hook tools (Ruff, Pyright, nbstripout).
+    This will install `pre-commit` and all the configured hook tools (Ruff, ty, nbstripout).
     ```sh
     pip install -r requirements.txt
     ```
@@ -78,7 +78,7 @@ When you run `git commit`:
 2.  It runs the configured hooks on the files staged for commit:
     *   **Ruff Formatter (`ruff-format`):** Automatically formats Python code. Files modified by the formatter are re-staged.
     *   **Ruff Linter (`ruff-check`):** Checks Python code for style issues, errors, and enforces rules (including type annotation checks, replacing `flake8-annotations`). Many issues are auto-fixed.
-    *   **Pyright (`pyright`):** Performs static type checking on Python code.
+    *   **ty (`ty check`):** Performs static type checking on Python code. ty is 10-100x faster than Pyright or mypy.
     *   **nbstripout (`nbstripout`):** Removes output cells from Jupyter Notebooks (`.ipynb` files) to keep the repository clean and reduce diff sizes.
 
 If any of these hooks report errors (and cannot auto-fix them), the commit will be aborted. You'll need to fix the reported issues and `git add` the files again before re-attempting the commit.
@@ -114,24 +114,24 @@ pre-commit autoupdate
 3.  **Check the `.git/hooks/pre-commit` file:**
     It should be a script managed by the `pre-commit` framework. Tampering with it directly can break the setup.
 
-### **Tool-specific errors (Ruff, Pyright, nbstripout)**
+### **Tool-specific errors (Ruff, ty, nbstripout)**
 -   Consult the specific tool's documentation for error messages.
 -   Ensure the versions in `.pre-commit-config.yaml` are compatible with your code or update them using `pre-commit autoupdate` and test.
 -   Ruff's behavior (including annotation checks) is configured in `pyproject.toml`.
 
 ### **"command not found" for a hook**
--   This usually means the tool (e.g., `ruff`, `pyright`) didn't install correctly via `pip install -r requirements.txt`.
+-   This usually means the tool (e.g., `ruff`, `ty`) didn't install correctly via `pip install -r requirements.txt`.
 -   Try reinstalling dependencies in a clean virtual environment.
 -   Ensure your `PATH` is correctly configured if you have multiple Python versions or environments.
 
 ---
 
 ## **🔗 Next Steps & References**
--   **[pre-commit Documentation](https://pre-commit.com/):** The official site for the pre-commit framework.
--   **[Ruff](https://docs.astral.sh/ruff/):** Documentation for the Ruff linter and formatter.
--   **[Pyright (Microsoft Pyright GitHub)](https://github.com/microsoft/pyright):** Information on the Pyright type checker.
--   **[nbstripout (GitHub)](https://github.com/kynan/nbstripout):** For `nbstripout` details.
+-   **[pre-commit Documentation](https://pre-commit.com/):** 
+-   **[Ruff Documentation](https://docs.astral.sh/ruff/):** 
+-   **[ty Documentation](https://docs.astral.sh/ty/):** 
+-   **[nbstripout (GitHub)](https://github.com/kynan/nbstripout):** 
 -   **`.pre-commit-config.yaml`:** Review this file in the repository to see the exact hook configurations.
--   **`pyproject.toml`:** Review this file for Ruff's specific linting and formatting rules.
+-   **`pyproject.toml`:** Review this file for Ruff's specific linting and formatting rules, and ty's type checking configuration.
 
 🚀 **Happy coding with clean, high-quality commits!**

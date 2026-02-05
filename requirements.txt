@@ -1,4 +1,4 @@
 # Python dependencies for git-hooks-template
 ruff  # For linting and formatting
-pyright  # For type checking
+ty  # For type checking (from Astral, creators of Ruff and UV)
 pre-commit
