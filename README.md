@@ -139,6 +139,4 @@ pre-commit autoupdate
 
 ---
 
-### Experimental: for using Coding Agents: there is an instructions file which seems to capture a lot af the standarts outs of the box and which I have shamelessly copied over from [Max Woolf](https://gist.github.com/minimaxir/10b780671ee5d695b4369b987413b38f)
-
-[the purpose of enforcing code style](What_is_the_Purpose_of_CodeStyle.md).
+### Experimental: for using Coding Agents: there is an [instructions file](Example Agent Instructions.MD) which seems to capture a lot af the standarts outs of the box and which I have shamelessly copied over from [Max Woolf](https://gist.github.com/minimaxir/10b780671ee5d695b4369b987413b38f)
